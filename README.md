@@ -90,5 +90,3 @@ smart-office/
 
 ---
 
-## ⚖️ Licencja
-MIT © 2026 — SmartOffice API Team.
