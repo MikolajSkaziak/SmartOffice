@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: smartoffice-db
+    environment:
+      POSTGRES_USER: office_user
+      POSTGRES_PASSWORD: office_password
+      POSTGRES_DB: smartoffice
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
