@@ -22,10 +22,15 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse register(RegisterRequest request) {
+        User.Role userRole = User.Role.ROLE_EMPLOYEE;
+        if (request.getRole() != null && request.getRole().equals("ROLE_MANAGER")) {
+            userRole = User.Role.ROLE_MANAGER;
+        }
+
         var user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(User.Role.ROLE_EMPLOYEE)
+                .role(userRole)
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);

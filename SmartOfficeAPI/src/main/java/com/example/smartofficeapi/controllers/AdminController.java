@@ -19,20 +19,20 @@ public class AdminController {
     private final UserService userService;
     private final JdbcStatsRepository jdbcStatsRepository;
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Integer>> getUserStats() {
         return ResponseEntity.ok(jdbcStatsRepository.getUserRoleStats());

@@ -19,14 +19,16 @@ public class ResourceController {
     private final ResourceService resourceService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('EMPLOYEE', 'MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_EMPLOYEE', 'ROLE_MANAGER')")
     public ResponseEntity<List<OfficeResource>> getAllResources() {
         return ResponseEntity.ok(resourceService.getAllResources());
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<OfficeResource> createResource(@RequestBody ResourceCreationRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(resourceService.createResource(request));
     }
 }
+
+

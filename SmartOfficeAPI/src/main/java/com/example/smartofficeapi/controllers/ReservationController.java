@@ -21,7 +21,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('EMPLOYEE', 'MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_EMPLOYEE', 'ROLE_MANAGER')")
     public ResponseEntity<Reservation> createReservation(
             @RequestBody ReservationRequest request,
             @AuthenticationPrincipal User user) {
@@ -32,7 +32,7 @@ public class ReservationController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('EMPLOYEE','MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_EMPLOYEE', 'ROLE_MANAGER')")
     public ResponseEntity<List<Reservation>> getAllReservations(){
         List<Reservation> reservations = reservationService.getAllReservations();
         return  ResponseEntity.ok(reservations);
